@@ -1,0 +1,29 @@
+@props([
+    'active' => false,
+    'title' => '',
+    'icon' => null,
+])
+
+<div
+    class="relative"
+    x-data="{ open: @json($active) }"
+>
+    <x-sidebar.link
+        collapsible
+        title="{{ $title }}"
+        x-on:click="open = !open"
+        isActive="{{ $active }}"
+        icon="{{ $icon }}"
+    />
+
+    <div
+        x-show="open && (isOpen || isHovered)"
+        x-collapse
+    >
+        <ul
+            class="relative px-0 pt-2 pb-0 ml-5 before:w-0 before:block before:absolute before:inset-y-0 before:left-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
+        >
+            {{ $slot }}
+        </ul>
+    </div>
+</div>
